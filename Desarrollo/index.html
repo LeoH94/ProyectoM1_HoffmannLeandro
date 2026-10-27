@@ -9,8 +9,28 @@
 <body>
     
     <header>
-        <h1>Generador de paleta de Colores</h1>
         <img src="../images/colorfly_logo.png" alt="Colorfly Studio"/>
+        <h1>Generador de paleta de Colores</h1>
+
+        <label>Cantidad de colores:
+        <select id="cantidad">
+            <option value="6">6</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        </label>
+
+        <label>Formato:
+        <select id="formato">
+            <option value="hex">HEX</option>
+            <option value="hsl">HSL</option>
+        </select>
+        </label>
+
+        <button id="generar">Generar paleta</button>
+
+        <div id="paleta"></div>
+
     </header>
 
     <main>
