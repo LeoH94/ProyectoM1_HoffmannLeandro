@@ -17,3 +17,29 @@ body {
   color: #333;
 }
 
+/* ==========================================================================
+   Variables y utilidades
+   ========================================================================== */
+
+:root {
+  --color-primario: #667eea;
+  --color-secundario: #764ba2;
+  --color-texto: #333;
+  --color-fondo: #f4f4f4;
+  
+  --espaciado-xs: 0.25rem;
+  --espaciado-sm: 0.5rem;
+  --espaciado-md: 1rem;
+  --espaciado-lg: 2rem;
+  --espaciado-xl: 4rem;
+}
+
+/* ==========================================================================
+   Logo empresarial
+   ========================================================================== */
+
+#colorflyLogo {
+    width: 300px;
+    height: auto;
+}
+
