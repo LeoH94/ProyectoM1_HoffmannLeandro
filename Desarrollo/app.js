@@ -12,14 +12,14 @@ function colorHex () {
     "0", "1", "2", "3", "4", "5", "6", "7",
     "8", "9", "A", "B", "C", "D", "E", "F"];
 
-    let color = "#";
+    let colorHex = "#";
 
     for (let i = 0; i < 6; i++) {
         const indice = Math.floor(Math.random() * caracteres.length);
-        color += caracteres[indice];
+        colorHex += caracteres[indice];
     }
 
-    return color;
+    return colorHex;
 }
 
 //Funcion para generar color HSL
@@ -31,3 +31,23 @@ function colorHsl () {
 
     return `hsl(${h}, ${s}%, ${l}%)`;
 }
+
+//Funcion para generar paleta
+
+function generarPaleta() {
+  paleta.innerHTML = "";
+
+  for (let i = 0; i < Number(cantidad.value); i++) {
+    const color = formato.value === "hex" ? colorHex() : colorHsl();
+
+    const caja = document.createElement("div");
+    caja.className = "color";
+    caja.style.backgroundColor = color;
+    paleta.appendChild(caja);
+  }
+}
+
+
+boton.addEventListener("click", generarPaleta);
+
+generarPaleta();
