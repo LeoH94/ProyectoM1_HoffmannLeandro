@@ -53,11 +53,34 @@ body {
 }
 
 /* ==========================================================================
-   Logo empresarial
+   Encabezado y selector
    ========================================================================== */
 
+#encabezado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #colorflyLogo {
-    width: 18rem;
+    width: 10rem;
     height: auto;
 }
 
+#selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
