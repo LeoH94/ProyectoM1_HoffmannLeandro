@@ -1,3 +1,7 @@
+/* ==============================
+   GENERADOR DE PALETA DE COLORES
+============================== */
+
 //Declaracion de variables
 
 const cantidad = document.getElementById("cantidad");
@@ -43,6 +47,7 @@ function generarPaleta() {
     const caja = document.createElement("div");
     caja.className = "color";
     caja.style.backgroundColor = color;
+    caja.textContent = color;
     paleta.appendChild(caja);
   }
 }
