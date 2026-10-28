@@ -24,7 +24,7 @@ function colorHex () {
 
 //Funcion para generar color HSL
 
-function generarColorHSL(){
+function colorHsl () {
     const h = Math.floor(Math.random() * 361);
     const s = Math.floor(Math.random() * 101);
     const l = Math.floor(Math.random() * 101);
