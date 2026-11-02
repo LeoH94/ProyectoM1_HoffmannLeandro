@@ -101,6 +101,12 @@ body {
     visibility: visible;
 }
 
+button:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--color-secundario);
+    outline-offset: 3px;
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */
