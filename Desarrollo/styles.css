@@ -75,6 +75,32 @@ body {
   gap: 2rem;
 }
 
+/* ==============================
+   MICROFEEDBACK - TOAST
+============================== */
+
+#notificacion {
+    position: fixed;
+    bottom: var(--espaciado-lg);
+    right: var(--espaciado-lg);
+
+    background-color: var(--color-texto);
+    color: #fff;
+
+    padding: var(--espaciado-md) 1.5rem;
+    border-radius: var(--espaciado-sm);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#notificacion.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */
