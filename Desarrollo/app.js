@@ -122,14 +122,16 @@ function dibujarPaleta() {
     if (c.bloqueado) caja.classList.add("bloqueado");
 
     // Boton de bloqueo
-    const btn = document.createElement("button");
-    btn.className = "btn-bloquear";
-    btn.textContent = c.bloqueado ? "🔒" : "🔓";
+      const btn = document.createElement("button");
+      btn.className = "btn-bloquear";
+      btn.textContent = c.bloqueado ? "🔒" : "🔓";
+      btn.title = c.bloqueado ? "Color bloqueado" : "Color desbloqueado";
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation(); // evita que se copie el color al tocar el candado
       c.bloqueado = !c.bloqueado;
       btn.textContent = c.bloqueado ? "🔒" : "🔓";
+      btn.title = c.bloqueado ? "Color bloqueado" : "Color desbloqueado";
       caja.classList.toggle("bloqueado", c.bloqueado);
 
       const hex = hslAHex(c.h, c.s, c.l).toUpperCase();
