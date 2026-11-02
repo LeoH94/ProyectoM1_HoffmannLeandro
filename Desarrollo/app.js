@@ -110,6 +110,13 @@ function mostrarNotificacion() {
 }
 
 
-boton.addEventListener("click", generarPaleta);
 
-generarPaleta();
+//Eventos
+
+boton.addEventListener("click", generarPaleta); //Genera paleta al hacer click en el boton
+
+cantidad.addEventListener("change", generarPaleta); //Genera paleta al cambiar la cantidad de colores
+
+formato.addEventListener("change", generarPaleta); //Genera paleta al cambiar el formato de color
+
+generarPaleta(); //Genera paleta al cargar la pagina
