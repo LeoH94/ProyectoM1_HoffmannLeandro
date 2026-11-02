@@ -9,6 +9,8 @@ const formato = document.getElementById("formato");
 const boton = document.getElementById("generar");
 const paleta = document.getElementById("paleta");
 
+const notificacion = document.getElementById("notificacion");
+
 //Funcion para generar color HEX
 
 function colorHex () {
@@ -50,6 +52,19 @@ function generarPaleta() {
     caja.textContent = color;
     paleta.appendChild(caja);
   }
+
+  mostrarNotificacion();
+
+}
+
+//Funcion para mostrar notificacion
+
+function mostrarNotificacion() {
+    notificacion.classList.add("visible");
+
+    setTimeout(() => {
+        notificacion.classList.remove("visible");
+    }, 2500);
 }
 
 
