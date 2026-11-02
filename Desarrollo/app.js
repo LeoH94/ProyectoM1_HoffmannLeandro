@@ -13,6 +13,8 @@ const notificacion = document.getElementById("notificacion");
 
 let colores = []; // cada color: { h, s, l, bloqueado }
 
+const btnGuardar = document.getElementById("btn-guardar");
+
 //Funcion para generar color HEX
 
 function colorHex () {
@@ -82,7 +84,6 @@ async function copiarHex(hex) {
   }
 }
 
-//Funcion para generar paleta
 
 //Funcion para generar paleta (respeta los bloqueados)
 
@@ -147,6 +148,42 @@ function dibujarPaleta() {
   });
 }
 
+
+//Funcion para guardar la paleta en localStorage
+
+function guardarPaleta() {
+  const datos = {
+    colores: colores,
+    cantidad: cantidad.value,
+    formato: formato.value,
+  };
+
+  localStorage.setItem("paleta", JSON.stringify(datos));
+  mostrarNotificacion("Paleta guardada");
+}
+
+//Funcion para cargar la paleta desde localStorage
+
+function cargarPaleta() {
+  const guardada = localStorage.getItem("paleta");
+
+  if (!guardada) return false; // no había nada guardado
+
+  try {
+    const datos = JSON.parse(guardada);
+
+    colores = datos.colores;
+    cantidad.value = datos.cantidad;
+    formato.value = datos.formato;
+
+    dibujarPaleta();
+    return true;
+  } catch (error) {
+    return false; // si el dato está dañado, no se rompe la página
+  }
+}
+
+
 //Funcion para mostrar notificacion
 
 let temporizador;
@@ -169,4 +206,8 @@ cantidad.addEventListener("change", generarPaleta); //Genera paleta al cambiar l
 
 formato.addEventListener("change", dibujarPaleta); //Genera paleta al cambiar el formato de color
 
-generarPaleta(); //Genera paleta al cargar la pagina
+btnGuardar.addEventListener("click", guardarPaleta); //Guarda la paleta al hacer click en el boton
+
+if (!cargarPaleta()) {
+  generarPaleta();
+} // si no había paleta guardada, genera una nueva
