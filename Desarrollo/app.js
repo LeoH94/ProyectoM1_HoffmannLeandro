@@ -69,47 +69,64 @@ function hslAHex(h, s, l) {
 } 
 
 
+//Funcion para copiar color al portapapeles
+
+async function copiarHex(hex) {
+  try {
+    await navigator.clipboard.writeText(hex);
+    mostrarNotificacion(`${hex} copiado`);
+  } catch (error) {
+    mostrarNotificacion("No se pudo copiar");
+  }
+}
+
 //Funcion para generar paleta
 
 function generarPaleta() {
   paleta.innerHTML = "";
 
   for (let i = 0; i < Number(cantidad.value); i++) {
-    let color;           // el texto que se muestra y se usa de fondo
-    let hexParaContraste; // siempre en HEX, para calcular el color de letra
+    let color;
+    let hex; // renombrado: ahora lo usamos para contraste Y para copiar
 
     if (formato.value === "hex") {
       color = colorHex();
-      hexParaContraste = color;
+      hex = color;
     } else {
       const { h, s, l } = colorHsl();
       color = `hsl(${h}, ${s}%, ${l}%)`;
-      hexParaContraste = hslAHex(h, s, l);
+      hex = hslAHex(h, s, l).toUpperCase(); // mayúsculas, igual que colorHex()
     }
 
     const caja = document.createElement("div");
     caja.className = "color";
 
     caja.style.backgroundColor = color;
-    caja.style.color = colorDeTexto(hexParaContraste);
+    caja.style.color = colorDeTexto(hex);
     caja.textContent = color;
+    caja.dataset.hex = hex; // guardamos el HEX en la caja
+
+    caja.addEventListener("click", () => copiarHex(caja.dataset.hex));
+
     paleta.appendChild(caja);
   }
 
-  mostrarNotificacion();
+  mostrarNotificacion("Paleta generada");
 }
 
 //Funcion para mostrar notificacion
 
-function mostrarNotificacion() {
-    notificacion.classList.add("visible");
+let temporizador;
 
-    setTimeout(() => {
-        notificacion.classList.remove("visible");
-    }, 2500);
+function mostrarNotificacion(mensaje) {
+  notificacion.textContent = mensaje;
+  notificacion.classList.add("visible");
+
+  clearTimeout(temporizador); // cancela el temporizador anterior
+  temporizador = setTimeout(() => {
+    notificacion.classList.remove("visible");
+  }, 2500);
 }
-
-
 
 //Eventos
 
