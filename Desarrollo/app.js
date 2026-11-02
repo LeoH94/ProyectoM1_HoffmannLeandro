@@ -131,6 +131,11 @@ function dibujarPaleta() {
       c.bloqueado = !c.bloqueado;
       btn.textContent = c.bloqueado ? "🔒" : "🔓";
       caja.classList.toggle("bloqueado", c.bloqueado);
+
+      const hex = hslAHex(c.h, c.s, c.l).toUpperCase();
+      mostrarNotificacion(
+        c.bloqueado ? `${hex} bloqueado` : `${hex} desbloqueado`
+      );
     });
 
     caja.appendChild(btn);
