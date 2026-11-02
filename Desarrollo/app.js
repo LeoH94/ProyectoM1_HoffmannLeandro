@@ -11,6 +11,8 @@ const paleta = document.getElementById("paleta");
 
 const notificacion = document.getElementById("notificacion");
 
+let colores = []; // cada color: { h, s, l, bloqueado }
+
 //Funcion para generar color HEX
 
 function colorHex () {
@@ -82,36 +84,60 @@ async function copiarHex(hex) {
 
 //Funcion para generar paleta
 
+//Funcion para generar paleta (respeta los bloqueados)
+
 function generarPaleta() {
-  paleta.innerHTML = "";
+  const nuevos = [];
 
   for (let i = 0; i < Number(cantidad.value); i++) {
-    let color;
-    let hex; // renombrado: ahora lo usamos para contraste Y para copiar
-
-    if (formato.value === "hex") {
-      color = colorHex();
-      hex = color;
+    if (colores[i] && colores[i].bloqueado) {
+      nuevos.push(colores[i]); // bloqueado: se queda igual
     } else {
       const { h, s, l } = colorHsl();
-      color = `hsl(${h}, ${s}%, ${l}%)`;
-      hex = hslAHex(h, s, l).toUpperCase(); // mayúsculas, igual que colorHex()
+      nuevos.push({ h, s, l, bloqueado: false });
     }
+  }
+
+  colores = nuevos;
+  dibujarPaleta();
+  mostrarNotificacion("Paleta generada");
+}
+
+//Funcion para dibujar la paleta en pantalla
+
+function dibujarPaleta() {
+  paleta.innerHTML = "";
+
+  colores.forEach((c) => {
+    const hex = hslAHex(c.h, c.s, c.l).toUpperCase();
+    const texto = formato.value === "hex" ? hex : `hsl(${c.h}, ${c.s}%, ${c.l}%)`;
 
     const caja = document.createElement("div");
     caja.className = "color";
-
-    caja.style.backgroundColor = color;
+    caja.style.backgroundColor = hex;
     caja.style.color = colorDeTexto(hex);
-    caja.textContent = color;
-    caja.dataset.hex = hex; // guardamos el HEX en la caja
+    caja.textContent = texto;
+    caja.dataset.hex = hex;
 
+    if (c.bloqueado) caja.classList.add("bloqueado");
+
+    // Boton de bloqueo
+    const btn = document.createElement("button");
+    btn.className = "btn-bloquear";
+    btn.textContent = c.bloqueado ? "🔒" : "🔓";
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // evita que se copie el color al tocar el candado
+      c.bloqueado = !c.bloqueado;
+      btn.textContent = c.bloqueado ? "🔒" : "🔓";
+      caja.classList.toggle("bloqueado", c.bloqueado);
+    });
+
+    caja.appendChild(btn);
     caja.addEventListener("click", () => copiarHex(caja.dataset.hex));
 
     paleta.appendChild(caja);
-  }
-
-  mostrarNotificacion("Paleta generada");
+  });
 }
 
 //Funcion para mostrar notificacion
@@ -134,6 +160,6 @@ boton.addEventListener("click", generarPaleta); //Genera paleta al hacer click e
 
 cantidad.addEventListener("change", generarPaleta); //Genera paleta al cambiar la cantidad de colores
 
-formato.addEventListener("change", generarPaleta); //Genera paleta al cambiar el formato de color
+formato.addEventListener("change", dibujarPaleta); //Genera paleta al cambiar el formato de color
 
 generarPaleta(); //Genera paleta al cargar la pagina
