@@ -157,8 +157,11 @@ select {
   animation: aparecer 0.4s ease;
 }
 
-.color:hover {
-  flex: 1.3;
+/* Solo en dispositivos con mouse: en pantallas táctiles el hover queda "pegado" */
+@media (hover: hover) {
+  .color:hover {
+    flex: 1.3;
+  }
 }
 
 /* El botón ocupa toda la caja y el código queda abajo */
@@ -278,7 +281,54 @@ select:focus-visible {
 
 
 /* ==========================================================================
-   7. Accesibilidad
+   7. Responsive
+   ========================================================================== */
+
+/* Tablet y celular (hasta 768px) */
+@media (max-width: 48rem) {
+  #selector {
+    flex-wrap: wrap;
+    gap: var(--espaciado-md);
+    padding: 0 var(--espaciado-md);
+  }
+
+  /* Los colores se apilan en vertical */
+  #paleta {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .color {
+    flex: none;
+    min-height: 6rem;
+  }
+
+  .paleta-guardada {
+    flex-wrap: wrap;
+  }
+
+  #notificacion {
+    right: var(--espaciado-md);
+    bottom: var(--espaciado-md);
+    left: var(--espaciado-md);
+    text-align: center;
+  }
+}
+
+/* Celulares chicos (hasta 480px) */
+@media (max-width: 30rem) {
+  #colorflyLogo {
+    width: 7rem;
+  }
+
+  #paletas-guardadas-seccion {
+    margin: var(--espaciado-md) auto;
+  }
+}
+
+
+/* ==========================================================================
+   8. Accesibilidad
    ========================================================================== */
 
 /* Respeta a quien pidió menos animaciones en su sistema */
