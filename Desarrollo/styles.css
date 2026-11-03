@@ -1,5 +1,37 @@
 /* ==========================================================================
-   Reset y configuración base
+   1. Variables
+   ========================================================================== */
+
+:root {
+  /* Colores */
+  --color-primario: #667eea;
+  --color-secundario: #764ba2;
+  --color-secundario-oscuro: #5f3b85;
+  --color-texto: #333;
+  --color-fondo: #f4f4f4;
+  --color-blanco: #fff;
+  --color-borde: #ddd;
+  --color-borde-input: #999;
+
+  /* Espaciado */
+  --espaciado-xs: 0.25rem;
+  --espaciado-sm: 0.5rem;
+  --espaciado-md: 1rem;
+  --espaciado-lg: 2rem;
+  --espaciado-xl: 4rem;
+
+  /* Bordes redondeados */
+  --radio-sm: 0.5rem;
+  --radio-lg: 1rem;
+
+  /* Transiciones */
+  --transicion-rapida: 0.2s ease;
+  --transicion-media: 0.3s ease;
+}
+
+
+/* ==========================================================================
+   2. Reset y estilos base
    ========================================================================== */
 
 * {
@@ -14,83 +46,33 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--color-texto);
 }
+
+h1 {
+  margin: var(--espaciado-sm) 0;
+  color: var(--color-secundario);
+}
+
 
 /* ==========================================================================
-   Variables y utilidades
+   3. Layout (estructura de la página)
    ========================================================================== */
 
-:root {
-  --color-primario: #667eea;
-  --color-secundario: #764ba2;
-  --color-texto: #333;
-  --color-fondo: #f4f4f4;
-  
-  --espaciado-xs: 0.25rem;
-  --espaciado-sm: 0.5rem;
-  --espaciado-md: 1rem;
-  --espaciado-lg: 2rem;
-  --espaciado-xl: 4rem;
+header {
+  padding: var(--espaciado-md);
+  background-color: var(--color-fondo);
 }
 
-/* ==========================================================================
-   Paleta de colores
-   ========================================================================== */
-
-#paleta {
+footer {
   display: flex;
-  gap: 0.75rem;              /* separación entre colores */
-  width: 100%;
-  max-width: 60rem;          /* limita el ancho total: colores más angostos */
-  height: 18.75rem;
-  margin: 1.25rem auto 0;    /* centrada */
-  padding: 0 var(--espaciado-md);
-}
-
-.color {
-  flex: 1;
-  display: flex;
-  position: relative;
-  border-radius: 1rem;       /* esquinas redondeadas */
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.btn-bloquear {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.color.bloqueado {
-  outline: 3px solid #000;
-  outline-offset: -3px;
-}
-
-.paleta-guardada {
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin: 8px 0;
+  justify-content: center;
+  margin-top: var(--espaciado-lg);
+  padding: var(--espaciado-md);
+  background-color: var(--color-fondo);
 }
-
-.muestras {
-  display: flex;
-}
-
-.muestra {
-  width: 30px;
-  height: 30px;
-}
-
-/* ==========================================================================
-   Encabezado y selector
-   ========================================================================== */
 
 #encabezado {
   display: flex;
@@ -100,167 +82,25 @@ body {
 }
 
 #colorflyLogo {
-    width: 10rem;
-    height: auto;
+  width: 10rem;
+  height: auto;
 }
 
 #selector {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: var(--espaciado-lg);
 }
 
-/* ==============================
-   MICROFEEDBACK - TOAST
-============================== */
-
-#notificacion {
-    position: fixed;
-    bottom: var(--espaciado-lg);
-    right: var(--espaciado-lg);
-
-    background-color: var(--color-texto);
-    color: #fff;
-
-    padding: var(--espaciado-md) 1.5rem;
-    border-radius: var(--espaciado-sm);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-#notificacion.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-button:focus-visible,
-select:focus-visible {
-    outline: 3px solid var(--color-secundario);
-    outline-offset: 3px;
-}
-
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-
-footer {
+#paleta {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-
-
-/* ---------- Botones de cada color ---------- */
-/* El botón ocupa toda la caja y el código queda abajo */
-.btn-copiar {
+  gap: 0.75rem;
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0 var(--espaciado-sm) var(--espaciado-md);
-  font-size: 0.9rem;
-  font-weight: bold;
-  overflow-wrap: anywhere;   /* por si el HSL no entra en una línea */
-  background: transparent;
-  border: none;
-  border-radius: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-
-.btn-bloquear {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  color: inherit;
-  cursor: pointer;
-}
-
-/* Evita que el hover violeta de los botones generales se aplique acá */
-.btn-copiar:hover,
-.btn-bloquear:hover {
-  background-color: transparent;
-}
-
-/* Foco visible sobre cualquier color de fondo */
-.color button:focus-visible {
-  outline: 3px solid currentColor;
-  outline-offset: -6px;
-}
-
-/* El borde del bloqueado usa el color del texto, así se ve en fondos claros y oscuros */
-.color.bloqueado {
-  outline: 3px solid currentColor;
-  outline-offset: -3px;
-}
-
-/* ---------- Animaciones sutiles ---------- */
-.color {
-  transition: flex 0.3s ease;
-  animation: aparecer 0.4s ease;
-}
-
-.color:hover {
-  flex: 1.3;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* Respeta a quien pidió menos animaciones en su sistema */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-/* ---------- UI general ---------- */
-header {
-  background-color: var(--color-fondo);
-  padding: var(--espaciado-md);
-}
-
-h1 {
-  color: var(--color-secundario);
-  margin: var(--espaciado-sm) 0;
-}
-
-button {
-  background-color: var(--color-secundario);
-  color: #fff;
-  border: none;
-  border-radius: var(--espaciado-sm);
-  padding: var(--espaciado-sm) var(--espaciado-md);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: #5f3b85;
-}
-
-select {
-  padding: var(--espaciado-sm);
-  border-radius: var(--espaciado-sm);
-  border: 1px solid #999;
-  font-size: 1rem;
+  max-width: 60rem;
+  height: 18.75rem;
+  margin: 1.25rem auto 0;
+  padding: 0 var(--espaciado-md);
 }
 
 #guardarPaleta {
@@ -275,20 +115,176 @@ select {
   padding: 0 var(--espaciado-md);
 }
 
-.paleta-guardada {
+
+/* ==========================================================================
+   4. Componentes
+   ========================================================================== */
+
+/* ---------- Botones y selects generales ---------- */
+
+button {
   padding: var(--espaciado-sm) var(--espaciado-md);
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: var(--espaciado-sm);
+  border: none;
+  border-radius: var(--radio-sm);
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transicion-rapida);
+}
+
+button:hover {
+  background-color: var(--color-secundario-oscuro);
+}
+
+select {
+  padding: var(--espaciado-sm);
+  border: 1px solid var(--color-borde-input);
+  border-radius: var(--radio-sm);
+  font-size: 1rem;
+}
+
+/* ---------- Color de la paleta ---------- */
+
+.color {
+  position: relative;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  cursor: pointer;
+  transition: flex var(--transicion-media);
+  animation: aparecer 0.4s ease;
+}
+
+.color:hover {
+  flex: 1.3;
+}
+
+/* El botón ocupa toda la caja y el código queda abajo */
+.btn-copiar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--espaciado-sm) var(--espaciado-md);
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  overflow-wrap: anywhere; /* por si el HSL no entra en una línea */
+}
+
+.btn-bloquear {
+  position: absolute;
+  top: var(--espaciado-sm);
+  right: var(--espaciado-sm);
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.2rem;
+}
+
+/* Evita que el hover violeta de los botones generales se aplique acá */
+.btn-copiar:hover,
+.btn-bloquear:hover {
+  background-color: transparent;
+}
+
+/* ---------- Paletas guardadas ---------- */
+
+.paleta-guardada {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm);
+  margin: var(--espaciado-sm) 0;
+  padding: var(--espaciado-sm) var(--espaciado-md);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+  background: var(--color-blanco);
+}
+
+.muestras {
+  display: flex;
 }
 
 .muestra {
+  width: 1.875rem;
+  height: 1.875rem;
+  margin-right: 0.125rem;
   border-radius: 50%;
-  margin-right: 2px;
 }
 
-footer {
-  background-color: var(--color-fondo);
-  padding: var(--espaciado-md);
-  margin-top: var(--espaciado-lg);
+/* ---------- Notificación (toast) ---------- */
+
+#notificacion {
+  position: fixed;
+  right: var(--espaciado-lg);
+  bottom: var(--espaciado-lg);
+  padding: var(--espaciado-md) 1.5rem;
+  border-radius: var(--radio-sm);
+  background-color: var(--color-texto);
+  color: var(--color-blanco);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transicion-media), visibility var(--transicion-media);
+}
+
+
+/* ==========================================================================
+   5. Estados
+   ========================================================================== */
+
+#notificacion.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* El borde usa el color del texto: se ve en fondos claros y oscuros */
+.color.bloqueado {
+  outline: 3px solid currentColor;
+  outline-offset: -3px;
+}
+
+button:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-secundario);
+  outline-offset: 3px;
+}
+
+/* Foco visible sobre cualquier color de fondo */
+.color button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: -6px;
+}
+
+
+/* ==========================================================================
+   6. Animaciones
+   ========================================================================== */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ==========================================================================
+   7. Accesibilidad
+   ========================================================================== */
+
+/* Respeta a quien pidió menos animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
