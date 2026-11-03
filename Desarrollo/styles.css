@@ -93,6 +93,12 @@ footer {
   gap: var(--espaciado-lg);
 }
 
+.campo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm); /* espacio entre label y select */
+}
+
 #paleta {
   display: flex;
   gap: 0.75rem;
