@@ -40,18 +40,21 @@ body {
 
 #paleta {
   display: flex;
+  gap: 0.75rem;              /* separación entre colores */
   width: 100%;
+  max-width: 60rem;          /* limita el ancho total: colores más angostos */
   height: 18.75rem;
-  margin-top: 1.25rem;
+  margin: 1.25rem auto 0;    /* centrada */
+  padding: 0 var(--espaciado-md);
 }
 
 .color {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
   position: relative;
+  border-radius: 1rem;       /* esquinas redondeadas */
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .btn-bloquear {
@@ -155,19 +158,41 @@ footer {
 
 
 /* ---------- Botones de cada color ---------- */
+/* El botón ocupa toda la caja y el código queda abajo */
 .btn-copiar {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 var(--espaciado-sm) var(--espaciado-md);
+  font-size: 0.9rem;
+  font-weight: bold;
+  overflow-wrap: anywhere;   /* por si el HSL no entra en una línea */
   background: transparent;
   border: none;
+  border-radius: inherit;
   color: inherit;
-  font: inherit;
-  font-weight: bold;
   cursor: pointer;
 }
 
+
 .btn-bloquear {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
   color: inherit;
+  cursor: pointer;
+}
+
+/* Evita que el hover violeta de los botones generales se aplique acá */
+.btn-copiar:hover,
+.btn-bloquear:hover {
+  background-color: transparent;
 }
 
 /* Foco visible sobre cualquier color de fondo */
