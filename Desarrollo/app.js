@@ -108,6 +108,17 @@ function generarPaleta() {
   mostrarNotificacion("Paleta generada");
 }
 
+//Funcion para actualizar el aspecto del boton de bloqueo
+
+function actualizarBotonBloqueo(btn, bloqueado) {
+  const texto = bloqueado ? "Desbloquear Color" : "Bloquear Color";
+
+  btn.textContent = bloqueado ? "🔒" : "🔓";
+  btn.title = texto; // tooltip nativo al apoyar el cursor
+  btn.setAttribute("aria-label", texto);
+  btn.setAttribute("aria-pressed", bloqueado);
+}
+
 //Funcion para dibujar la paleta en pantalla
 
 function dibujarPaleta() {
@@ -133,15 +144,11 @@ function dibujarPaleta() {
     // Botón de bloqueo
     const btnBloquear = document.createElement("button");
     btnBloquear.className = "btn-bloquear";
-    btnBloquear.title = "Bloquear color";
-    btnBloquear.setAttribute("aria-label", "Bloquear color");
-    btnBloquear.setAttribute("aria-pressed", c.bloqueado);
-    btnBloquear.textContent = c.bloqueado ? "🔒" : "🔓";
+    actualizarBotonBloqueo(btnBloquear, c.bloqueado);
 
     btnBloquear.addEventListener("click", () => {
       c.bloqueado = !c.bloqueado;
-      btnBloquear.textContent = c.bloqueado ? "🔒" : "🔓";
-      btnBloquear.setAttribute("aria-pressed", c.bloqueado);
+      actualizarBotonBloqueo(btnBloquear, c.bloqueado);
       caja.classList.toggle("bloqueado", c.bloqueado);
       mostrarNotificacion(c.bloqueado ? `${hex} bloqueado` : `${hex} desbloqueado`);
     });
