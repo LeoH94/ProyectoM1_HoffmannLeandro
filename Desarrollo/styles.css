@@ -69,6 +69,22 @@ body {
   outline-offset: -3px;
 }
 
+.paleta-guardada {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.muestras {
+  display: flex;
+}
+
+.muestra {
+  width: 30px;
+  height: 30px;
+}
+
 /* ==========================================================================
    Encabezado y selector
    ========================================================================== */

@@ -15,6 +15,9 @@ let colores = []; // cada color: { h, s, l, bloqueado }
 
 const btnGuardar = document.getElementById("btn-guardar");
 
+const contenedorGuardadas = document.getElementById("paletas-guardadas");
+const CLAVE = "paletasGuardadas";
+
 //Funcion para generar color HEX
 
 function colorHex () {
@@ -149,38 +152,96 @@ function dibujarPaleta() {
 }
 
 
-//Funcion para guardar la paleta en localStorage
+//Funcion para leer la lista de paletas guardadas
+
+function obtenerPaletas() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE)) || [];
+  } catch (error) {
+    return []; // si el dato está dañado, empieza con lista vacía
+  }
+}
+
+//Funcion para guardar la paleta actual (se suma a la lista)
 
 function guardarPaleta() {
-  const datos = {
-    colores: colores,
+  const lista = obtenerPaletas();
+
+  lista.push({
+    id: Date.now(), // número único para identificar cada paleta
+    colores: colores.map((c) => ({ h: c.h, s: c.s, l: c.l })),
     cantidad: cantidad.value,
     formato: formato.value,
-  };
+  });
 
-  localStorage.setItem("paleta", JSON.stringify(datos));
+  localStorage.setItem(CLAVE, JSON.stringify(lista));
+  mostrarPaletasGuardadas();
   mostrarNotificacion("Paleta guardada");
 }
 
-//Funcion para cargar la paleta desde localStorage
+//Funcion para mostrar las paletas guardadas en pantalla
 
-function cargarPaleta() {
-  const guardada = localStorage.getItem("paleta");
+function mostrarPaletasGuardadas() {
+  contenedorGuardadas.innerHTML = "";
 
-  if (!guardada) return false; // no había nada guardado
+  const lista = obtenerPaletas();
 
-  try {
-    const datos = JSON.parse(guardada);
-
-    colores = datos.colores;
-    cantidad.value = datos.cantidad;
-    formato.value = datos.formato;
-
-    dibujarPaleta();
-    return true;
-  } catch (error) {
-    return false; // si el dato está dañado, no se rompe la página
+  if (lista.length === 0) {
+    contenedorGuardadas.textContent = "Todavía no guardaste ninguna paleta";
+    return;
   }
+
+  lista.forEach((p) => {
+    const item = document.createElement("div");
+    item.className = "paleta-guardada";
+
+    // Muestras de color (cuadraditos)
+    const muestras = document.createElement("div");
+    muestras.className = "muestras";
+
+    p.colores.forEach((c) => {
+      const muestra = document.createElement("span");
+      muestra.className = "muestra";
+      muestra.style.backgroundColor = hslAHex(c.h, c.s, c.l);
+      muestras.appendChild(muestra);
+    });
+
+    // Boton cargar
+    const btnCargar = document.createElement("button");
+    btnCargar.textContent = "Cargar";
+    btnCargar.addEventListener("click", () => cargarPaletaGuardada(p.id));
+
+    // Boton eliminar
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.addEventListener("click", () => eliminarPaleta(p.id));
+
+    item.append(muestras, btnCargar, btnEliminar);
+    contenedorGuardadas.appendChild(item);
+  });
+}
+
+//Funcion para cargar una paleta guardada en la pantalla principal
+
+function cargarPaletaGuardada(id) {
+  const elegida = obtenerPaletas().find((p) => p.id === id);
+  if (!elegida) return;
+
+  colores = elegida.colores.map((c) => ({ ...c, bloqueado: false }));
+  cantidad.value = elegida.cantidad;
+  formato.value = elegida.formato;
+
+  dibujarPaleta();
+  mostrarNotificacion("Paleta cargada");
+}
+
+//Funcion para eliminar una paleta guardada
+
+function eliminarPaleta(id) {
+  const lista = obtenerPaletas().filter((p) => p.id !== id);
+  localStorage.setItem(CLAVE, JSON.stringify(lista));
+  mostrarPaletasGuardadas();
+  mostrarNotificacion("Paleta eliminada");
 }
 
 
@@ -208,6 +269,6 @@ formato.addEventListener("change", dibujarPaleta); //Genera paleta al cambiar el
 
 btnGuardar.addEventListener("click", guardarPaleta); //Guarda la paleta al hacer click en el boton
 
-if (!cargarPaleta()) {
-  generarPaleta();
-} // si no había paleta guardada, genera una nueva
+generarPaleta(); // Genera paleta al cargar la pagina
+
+mostrarPaletasGuardadas(); //Muestra las paletas guardadas al cargar la pagina
