@@ -17,6 +17,7 @@ const btnGuardar = document.getElementById("btn-guardar");
 
 const contenedorGuardadas = document.getElementById("paletas-guardadas");
 const CLAVE = "paletasGuardadas";
+const MAXIMO_PALETAS = 5;
 
 //Funcion para generar color HEX
 
@@ -168,11 +169,16 @@ function guardarPaleta() {
   const lista = obtenerPaletas();
 
   lista.push({
-    id: Date.now(), // número único para identificar cada paleta
+    id: Date.now(),
     colores: colores.map((c) => ({ h: c.h, s: c.s, l: c.l })),
     cantidad: cantidad.value,
     formato: formato.value,
   });
+
+  // Si hay más del máximo, elimina las primeras (las más antiguas)
+  while (lista.length > MAXIMO_PALETAS) {
+    lista.shift();
+  }
 
   localStorage.setItem(CLAVE, JSON.stringify(lista));
   mostrarPaletasGuardadas();
