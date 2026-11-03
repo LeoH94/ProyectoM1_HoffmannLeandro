@@ -97,7 +97,7 @@ footer {
   display: flex;
   gap: 0.75rem;
   width: 100%;
-  max-width: 60rem;
+  max-width: 100rem;
   height: 18.75rem;
   margin: 1.25rem auto 0;
   padding: 0 var(--espaciado-md);
@@ -151,17 +151,19 @@ select {
   display: flex;
   flex: 1;
   overflow: hidden;
-  border: 1px solid currentColor; /* borde fino que se adapta a fondos claros y oscuros */
+  border: 1px solid currentColor;
   border-radius: var(--radio-lg);
   cursor: pointer;
-  transition: flex var(--transicion-media);
+  transition: transform var(--transicion-media), box-shadow var(--transicion-media);
   animation: aparecer 0.4s ease;
 }
 
 /* Solo en dispositivos con mouse: en pantallas táctiles el hover queda "pegado" */
 @media (hover: hover) {
   .color:hover {
-    flex: 1.3;
+    transform: scale(1.04);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.25);
+    z-index: 1; /* para que quede por encima de los colores vecinos */
   }
 }
 

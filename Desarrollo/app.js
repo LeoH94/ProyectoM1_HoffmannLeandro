@@ -19,6 +19,8 @@ const contenedorGuardadas = document.getElementById("paletas-guardadas");
 const CLAVE = "paletasGuardadas";
 const MAXIMO_PALETAS = 5;
 
+
+
 //Funcion para generar color HEX
 
 function colorHex () {
@@ -36,6 +38,8 @@ function colorHex () {
     return colorHex;
 }
 
+
+
 //Funcion para generar color HSL
 
 function colorHsl () {
@@ -45,6 +49,7 @@ function colorHsl () {
 
     return { h, s, l };
 }
+
 
 
 //Funcion para determinar color de Texto
@@ -62,6 +67,8 @@ function colorDeTexto(hex) {
   return brillo > 128 ? "#000000" : "#ffffff";
 }
 
+
+
 //Funcion para converitir HSL a HEX
 
 function hslAHex(h, s, l) {
@@ -77,6 +84,7 @@ function hslAHex(h, s, l) {
 } 
 
 
+
 //Funcion para copiar color al portapapeles
 
 async function copiarHex(hex) {
@@ -87,6 +95,7 @@ async function copiarHex(hex) {
     mostrarNotificacion("No se pudo copiar");
   }
 }
+
 
 
 //Funcion para generar paleta (respeta los bloqueados)
@@ -108,6 +117,8 @@ function generarPaleta() {
   mostrarNotificacion("Paleta generada");
 }
 
+
+
 //Funcion para actualizar el aspecto del boton de bloqueo
 
 function actualizarBotonBloqueo(btn, bloqueado) {
@@ -118,6 +129,8 @@ function actualizarBotonBloqueo(btn, bloqueado) {
   btn.setAttribute("aria-label", texto);
   btn.setAttribute("aria-pressed", bloqueado);
 }
+
+
 
 //Funcion para dibujar la paleta en pantalla
 
@@ -138,6 +151,7 @@ function dibujarPaleta() {
     const btnCopiar = document.createElement("button");
     btnCopiar.className = "btn-copiar";
     btnCopiar.textContent = texto;
+    btnCopiar.title = "Hacer click para copiar"; // tooltip nativo
     btnCopiar.setAttribute("aria-label", `Copiar ${hex} al portapapeles`);
     btnCopiar.addEventListener("click", () => copiarHex(hex));
 
@@ -159,6 +173,7 @@ function dibujarPaleta() {
 }
 
 
+
 //Funcion para leer la lista de paletas guardadas
 
 function obtenerPaletas() {
@@ -168,6 +183,8 @@ function obtenerPaletas() {
     return []; // si el dato está dañado, empieza con lista vacía
   }
 }
+
+
 
 //Funcion para guardar la paleta actual (se suma a la lista)
 
@@ -190,6 +207,8 @@ function guardarPaleta() {
   mostrarPaletasGuardadas();
   mostrarNotificacion("Paleta guardada");
 }
+
+
 
 //Funcion para mostrar las paletas guardadas en pantalla
 
@@ -233,6 +252,8 @@ function mostrarPaletasGuardadas() {
   });
 }
 
+
+
 //Funcion para cargar una paleta guardada en la pantalla principal
 
 function cargarPaletaGuardada(id) {
@@ -247,6 +268,8 @@ function cargarPaletaGuardada(id) {
   mostrarNotificacion("Paleta cargada");
 }
 
+
+
 //Funcion para eliminar una paleta guardada
 
 function eliminarPaleta(id) {
@@ -255,6 +278,7 @@ function eliminarPaleta(id) {
   mostrarPaletasGuardadas();
   mostrarNotificacion("Paleta eliminada");
 }
+
 
 
 //Funcion para mostrar notificacion
@@ -270,6 +294,8 @@ function mostrarNotificacion(mensaje) {
     notificacion.classList.remove("visible");
   }, 2500);
 }
+
+
 
 //Eventos
 
