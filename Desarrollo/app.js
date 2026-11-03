@@ -121,33 +121,32 @@ function dibujarPaleta() {
     caja.className = "color";
     caja.style.backgroundColor = hex;
     caja.style.color = colorDeTexto(hex);
-    caja.textContent = texto;
-    caja.dataset.hex = hex;
-
     if (c.bloqueado) caja.classList.add("bloqueado");
 
-    // Boton de bloqueo
-      const btn = document.createElement("button");
-      btn.className = "btn-bloquear";
-      btn.textContent = c.bloqueado ? "🔒" : "🔓";
-      btn.title = c.bloqueado ? "Color bloqueado" : "Color desbloqueado";
+    // Botón que copia el color
+    const btnCopiar = document.createElement("button");
+    btnCopiar.className = "btn-copiar";
+    btnCopiar.textContent = texto;
+    btnCopiar.setAttribute("aria-label", `Copiar ${hex} al portapapeles`);
+    btnCopiar.addEventListener("click", () => copiarHex(hex));
 
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation(); // evita que se copie el color al tocar el candado
+    // Botón de bloqueo
+    const btnBloquear = document.createElement("button");
+    btnBloquear.className = "btn-bloquear";
+    btnBloquear.title = "Bloquear color";
+    btnBloquear.setAttribute("aria-label", "Bloquear color");
+    btnBloquear.setAttribute("aria-pressed", c.bloqueado);
+    btnBloquear.textContent = c.bloqueado ? "🔒" : "🔓";
+
+    btnBloquear.addEventListener("click", () => {
       c.bloqueado = !c.bloqueado;
-      btn.textContent = c.bloqueado ? "🔒" : "🔓";
-      btn.title = c.bloqueado ? "Color bloqueado" : "Color desbloqueado";
+      btnBloquear.textContent = c.bloqueado ? "🔒" : "🔓";
+      btnBloquear.setAttribute("aria-pressed", c.bloqueado);
       caja.classList.toggle("bloqueado", c.bloqueado);
-
-      const hex = hslAHex(c.h, c.s, c.l).toUpperCase();
-      mostrarNotificacion(
-        c.bloqueado ? `${hex} bloqueado` : `${hex} desbloqueado`
-      );
+      mostrarNotificacion(c.bloqueado ? `${hex} bloqueado` : `${hex} desbloqueado`);
     });
 
-    caja.appendChild(btn);
-    caja.addEventListener("click", () => copiarHex(caja.dataset.hex));
-
+    caja.append(btnCopiar, btnBloquear);
     paleta.appendChild(caja);
   });
 }
