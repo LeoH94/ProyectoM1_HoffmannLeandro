@@ -55,10 +55,11 @@ Elegí la cantidad de colores y el formato.
 -> Hacé click en Generar paleta.
 ![Generar Paleta](Capturas/Generar-paleta.gif)
 
-Hacé click en un color para copiar su código, o en el candado 🔓 para bloquearlo.
+-> Hacé click en un color para copiar su código, o en el candado 🔓 para bloquearlo.
+![Copiar codigo](Capturas/Copia-bloqueo.gif)
 
 Usá Guardar paleta para conservarla; después la vas a ver en la sección Paletas guardadas.
-
+![Guardar paleta](Capturas/Guardar-cargar.gif)
 
 🧭 Proceso de desarrollo
 
