@@ -15,7 +15,8 @@ Siempre leí, probé y adapté las respuestas antes de usarlas en el proyecto.
 Qué necesitaba: copiar el código HEX al portapapeles aunque en pantalla se muestre HSL.
 Prompt:
 
-![Conversión de colores HSL a HEX](Documentacion/Capturas/ConversionDeColores.png)(Documentacion/Capturas/ConversionDeColores2.png)
+![Conversión de colores HSL a HEX](Documentación/Capturas/ConversionDeColores.png)
+![Conversión de colores HSL a HEX](Documentación/Capturas/ConversionDeColores2.png)
 
 Qué obtuve: una función que convierte HSL a HEX.
 Qué hice yo con eso: (ej.: la probé con distintos colores y la integré a mi función de copiar).
@@ -26,7 +27,9 @@ Archivo: app.js
 Qué necesitaba: que un color bloqueado se mantenga al generar una paleta nueva.
 Prompt:
 
-![Conversión de colores HSL a HEX](Documentacion/Capturas/BloqueoDeColor.png)(Documentacion/Capturas/BloqueoDeColor2.png)(Documentacion/Capturas/BloqueoDeColor3.png)
+![Bloqueo de Colores](Documentación/Capturas/BloqueoDeColores.png)
+![Bloqueo de Colores](Documentación/Capturas/BloqueoDeColores2.png)
+![Bloqueo de Colores](Documentación/Capturas/BloqueoDeColores3.png)
 
 Qué obtuve: una forma de guardar la paleta como array de objetos {h, s, l, bloqueado}.
 Qué hice yo con eso: (ej.: lo adapté a mi forma de crear los colores con createElement).
@@ -37,7 +40,9 @@ Archivo: app.js
 Qué necesitaba: guardar la paleta, mostrar las guardadas y poder cargar una; si hay más de 5, se borran las más antiguas.
 Prompt:
 
-![Conversión de colores HSL a HEX](Documentacion/Capturas/GuardarPaleta.png)(Documentacion/Capturas/GuardarPaleta2.png)(Documentacion/Capturas/GuardarPaleta3.png)
+![Guardado de Paleta de colores](Documentación/Capturas/GuardarPaleta.png)
+![Guardado de Paleta de colores](Documentación/Capturas/GuardarPaleta2.png)
+![Guardado de Paleta de colores](Documentación/Capturas/GuardarPaleta3.png)
 
 Qué obtuve: explicación y código para usar localStorage con un límite de 5 paletas.
 Qué hice yo con eso: (completar)
