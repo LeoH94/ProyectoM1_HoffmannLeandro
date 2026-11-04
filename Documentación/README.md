@@ -7,7 +7,7 @@ Proyecto integrador del Módulo 1 de la carrera Full Stack Developer (SoyHenry).
 
 Aplicación web que genera paletas de colores aleatorias, muestra el código de cada color en HEX o HSL, permite copiarlo, bloquear los colores que te gustan y guardar tus paletas favoritas.
 
-🔗 Repositorio: ProyectoM1_HoffmannLeandro 🌐 Demo:
+🔗 Repositorio: ProyectoM1_HoffmannLeandro 🌐 Demo: 👉 [Ver Colorfly Studio en vivo](https://leoh94.github.io/ProyectoM1_HoffmannLeandro/Desarrollo/)
 
 ✨ Funcionalidades
 Generar una paleta aleatoria al cargar la página o al hacer click en Generar paleta.
