@@ -50,9 +50,13 @@ Descargá o cloná el repositorio:
 bash
    git clone https://github.com/LeoH94/ProyectoM1_HoffmannLeandro.git
 Abrí el archivo index.html en tu navegador (o usá la extensión Live Server de VS Code).
+
 Elegí la cantidad de colores y el formato.
-Hacé click en Generar paleta.
+-> Hacé click en Generar paleta.
+![Generar Paleta](Capturas/Generar-paleta.gif)
+
 Hacé click en un color para copiar su código, o en el candado 🔓 para bloquearlo.
+
 Usá Guardar paleta para conservarla; después la vas a ver en la sección Paletas guardadas.
 
 
@@ -113,7 +117,6 @@ prefers-reduced-motion para quitar animaciones a quien lo pidió en su sistema.
 
 Fui subiendo los cambios al repositorio con Git y GitHub:
 
-bash
 git add .
 git commit -m "Mensaje que describe el cambio"
 git push origin main
